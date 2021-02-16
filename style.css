@@ -1,0 +1,125 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap');
+
+
+body {
+  font-family: 'Roboto', sans-serif; 
+}
+
+input::placeholder {
+    color: #777;
+}
+
+.logo-text {
+    font-weight: 700;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.logo-text:after {
+    content: '+';
+}
+
+.hero-img {
+    padding: 100px 50px;
+    min-width: 200px;
+    max-width: 400px;
+}
+
+.heading-container {
+    padding: 0px 50px;
+}
+
+.search-container {
+    margin: 0 auto;
+    padding: 100px 50px;
+}
+
+.search {
+    width: 400px;
+}
+
+.title {
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.subtitle {
+    font-weight: 400;
+    font-size: 17px;
+}
+
+#results {
+    display: none;
+}
+
+.card-margin {
+    margin-bottom: 90px;
+}
+
+.product-image {
+    padding: 50px;
+}
+
+.product-details {
+    padding: 50px;
+    margin-top: 50px;
+}
+
+.product-title {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.product-description {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.product-action {
+margin-top: 20px;
+}
+
+.product-action a {
+    margin-right: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    .search-container {
+        padding: 100px 34px 50px 0px;
+    }
+
+    .card-margin {
+        margin-bottom: 50px;
+    }
+    
+    .product-image {
+        width: 100%;
+        padding: 50px;
+    }
+    
+    .product-details {
+        padding: 20px;
+        margin-top: 0px;
+    }
+    
+    .product-title {
+        font-weight: 700;
+        font-size: 22px;
+    }
+    
+    .product-description {
+        font-weight: 400;
+        font-size: 14px;
+    }
+    
+    .product-action {
+    margin-top: 30px;
+    margin-bottom: 60px;
+    }
+    
+    .product-action a {
+        margin-right: 20px;
+    }
+}
+

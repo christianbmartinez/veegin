@@ -1,0 +1,15 @@
+{
+  "name": "veegin",
+  "version": "1.0.0",
+  "description": "An app for finding vegan and gluten free products",
+  "main": "index.js",
+  "scripts": {
+    "start": "live-server"
+  },
+  "author": "Christian B. Martinez",
+  "license": "MIT",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  },
+  "devDependencies": {}
+}
