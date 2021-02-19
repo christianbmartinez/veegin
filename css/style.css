@@ -30,13 +30,23 @@ input::placeholder {
     padding: 0px 50px;
 }
 
-.search-container {
-    margin: 0 auto;
-    padding: 100px 50px;
+#search-row {
+    display: none;
 }
 
-.search {
-    width: 400px;
+#location-results {
+    display: none;
+}
+
+#no-results {
+    margin: 45px 0px 0px 0px;
+    text-align: center;
+    display: none;
+}
+
+
+.search-container {
+    padding: 100px 50px;
 }
 
 .title {
@@ -47,6 +57,23 @@ input::placeholder {
 .subtitle {
     font-weight: 400;
     font-size: 17px;
+}
+
+.location-container {
+    padding: 35px;
+}
+
+.location-title {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.location-action {
+    margin-top: 10%;
+}
+
+.location-action a {
+    margin-right: 20px;
 }
 
 #results {
@@ -84,9 +111,30 @@ margin-top: 20px;
     margin-right: 20px;
 }
 
+#location-results {
+    margin-top: 50px;
+}
+
 @media only screen and (max-width: 600px) {
     .search-container {
-        padding: 100px 34px 50px 0px;
+        padding: 100px 0px 50px 0px;
+    }
+
+    .location-container {
+        padding: 25px;
+    }
+    
+    .location-title {
+        font-weight: 700;
+        font-size: 16px;
+    }
+    
+    .location-action {
+        margin-top: 13%;
+    }
+
+    .location-action a {
+        margin-right: 10px;
     }
 
     .card-margin {
