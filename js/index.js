@@ -49,7 +49,7 @@ submitZip.onclick = () => {
 }
 
 query.onfocus = () => {
-  query.placeholder =  query.placeholder // Assign the current placeholder value
+  query.placeholder =  sessionStorage.getItem('locationName') ? query.placeholder = `Search ${sessionStorage.getItem('locationName')}` : query.placeholder // Assign the current placeholder value
   query.placeholder.color = '#777' // Make sure the color is dark gray
 
   query.onchange = () => {    
@@ -62,8 +62,8 @@ logo.onclick = () => {
 }
 
 submit.onclick = () => {
-  if (!term && !zipCode) { // If search is performed and these values are missing, let them know
-    query.placeholder = 'All fields are required'
+  if (!term) { // If search is performed and the value is missing, let them know
+    query.placeholder = 'Search is required'
   } else { // Otherwise, display the content
     sectionHero.style.display = 'none'
     sectionResults.style.display = 'block'
@@ -108,7 +108,9 @@ fetch('https://api.kroger.com/v1/connect/oauth2/token', tokenSettings)
   }
 
   let locationData = data.data;
-  locationData.length >= 1 ? locationResults.style.display = 'block' : noResults.style.display = 'block' // If no results, display no results block
+  console.log(locationData)
+  // We need to filter the results for locations based on whether the result has a deli department. This lets us know it's a food store, not a jewelry store. Or a gas station.
+  locationData.length >= 0 ? locationResults.style.display = 'block' : noResults.style.display = 'block' // If no results, display no results block
 
   locationData.forEach(location => {
     noResults.style.display = 'none' // If no results block is active, disable it
@@ -145,7 +147,7 @@ fetch('https://api.kroger.com/v1/connect/oauth2/token', tokenSettings)
 .catch(err => console.log('Error', err))
 
 .then(data => { // Products api
-	return fetch(`https://api.kroger.com/v1/products?filter.term=gluten%20free%20${term}&filter.limit=50&filter.locationId=${sessionStorage.getItem('locationId')}`, {
+	return fetch(`https://api.kroger.com/v1/products?filter.term=gluten%20free%20${term}&filter.limit=25&filter.locationId=${sessionStorage.getItem('locationId')}`, {
 		"async": true,
     "crossDomain": true,
     "method": "GET",
@@ -158,7 +160,9 @@ fetch('https://api.kroger.com/v1/connect/oauth2/token', tokenSettings)
 .then(res => res.json())
 .then(products => {
   let productArray = products.data
-  productArray.length >= 1 ? sectionResults.style.display = 'block' : noResults.style.display = 'block'
+
+  console.log(productArray)
+  productArray.length >= 0 ? sectionResults.style.display = 'block' : noResults.style.display = 'block'
       productArray.forEach(item => { 
         noResults.style.display = 'none'     
          let imagesArr = item.images[0].sizes; // Images in this api aren't sorted 
@@ -167,6 +171,7 @@ fetch('https://api.kroger.com/v1/connect/oauth2/token', tokenSettings)
              imagesArr = image.url
            } 
          })
+         console.log(item.items)
          // Push all results into results container
         sectionResults.innerHTML += `
         <div class="container">
@@ -178,23 +183,58 @@ fetch('https://api.kroger.com/v1/connect/oauth2/token', tokenSettings)
                     <div class="col s12 m12 l4">
                         <div class="product-details">
                             <h4 class="product-title">${item.description}</h4>
+                            <h4 class="product-title">$${item.items[0].price.regular ? item.items[0].price.regular : 'Price not available'}</h4>
                             <div class="product-description">
                                 <p>Category: ${item.categories}</p>
                                 <p>Product ID: ${item.items[0].itemId}</p>
                                 <p>UPC: ${item.upc}</p>
-                                <p>Available at your local ${sessionStorage.getItem('locationName')}</p>
+                                <p>Available at ${sessionStorage.getItem('locationName')} ${item.aisleLocations[0].description ? item.aisleLocations[0].description : ''} </p>
                             </div>              
                             <div class="product-action left">
                                 <a class="btn-floating waves-effect waves-light purple darken-1"><i class="material-icons">add_shopping_cart</i></a>
                                 <a class="btn-floating waves-effect waves-light red darken-1"><i class="material-icons">location_on</i></a>
-                                <a class="btn-floating waves-effect waves-light green darken-1"><i class="material-icons">monetization_on</i></a>
+                                <a onclick="modalOpen('${item.description}','${item.items[0].price.promo}')" class="btn-floating waves-effect waves-light green darken-1"><i class="material-icons">monetization_on</i></a>
                             </div>
                         </div>
                     </div>
                 </div>              
             </div>
         </div>  
+        <div id="modal-promo" class="modalpromo">
+            <div class="modalpromo-content">
+            <i class="material-icons promo-icon">monetization_on</i>
+                <span class="close-modal" onclick="modalClose()">&times;</span>
+                <p id="modal-desc"></p>
+                <p id="modal-price"></p>
+            </div>        
+        </div>
         ` 
+        
+        let modalPromo = document.getElementById("modal-promo");
+        let modalDesc = document.getElementById("modal-desc");
+        let modalPrice = document.getElementById("modal-price");
+
+        modalOpen = (name, price) => {
+          console.log(name,price)
+          modalPromo.style.display = "block";
+          modalDesc.innerHTML = name;
+          if (price > 0) {
+            modalPrice.innerHTML = `Promo price! <span class="price">$${price}</span>`;
+          } else if (!price || price === 0 || price === '0') {
+            modalPrice.innerHTML = '<i>No promo price found on this item.</i>'
+          }  
+        }
+
+        modalClose = () => {
+          modalPromo.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+          if (event.target == modalPromo) {
+            modalPromo.style.display = "none";
+          }
+        }
+
       })
 })
 .catch(err => console.log('Error', err))

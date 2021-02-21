@@ -34,16 +34,11 @@ input::placeholder {
     display: none;
 }
 
-#location-results {
-    display: none;
-}
-
 #no-results {
     margin: 45px 0px 0px 0px;
     text-align: center;
     display: none;
 }
-
 
 .search-container {
     padding: 100px 50px;
@@ -57,6 +52,11 @@ input::placeholder {
 .subtitle {
     font-weight: 400;
     font-size: 17px;
+}
+
+#location-results {
+    display: none;
+    margin-top: 50px;
 }
 
 .location-container {
@@ -111,9 +111,48 @@ margin-top: 20px;
     margin-right: 20px;
 }
 
-#location-results {
-    margin-top: 50px;
-}
+.modalpromo {
+    display: none; 
+    position: fixed; 
+    z-index: 9999; 
+    padding-top: 100px; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+  }
+  
+  .modalpromo-content {
+    background-color: #43a047 ;
+    border-radius: 10px;
+    color: #fff;
+    margin: 100px auto;
+    text-align: center;
+    padding: 20px;
+    width: 80%;
+    box-shadow: 0 8px 6px -6px #1e4620 ;
+  }
+  
+  .close-modal {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    margin-top: -15px;
+  }
+  
+  .close-modal:hover,
+  .close-modal:focus {
+    color: #ccc;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .price {
+      font-weight: bold;
+  }
 
 @media only screen and (max-width: 600px) {
     .search-container {
