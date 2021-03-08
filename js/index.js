@@ -13,11 +13,9 @@ const sectionHero = document.getElementById('hero')
 const sectionResults = document.getElementById('results')
 const noResults = document.getElementById('no-results')
 
-const clientID = 'nodeoauth2-2c28d1cc3d0bc137ee2967a978e827793176266780055496662'
-const clientSecret = 'bWwJA2SgDjPiizmuwM4tOtaVZ5us5OHaOHfbldVF'
+const clientID = 'newone-08b1d443ef0ab3677d2af8ef1afb1b287431029130922910378'
+const clientSecret = '1Kft5ZHPX8Qcn7dqyI6bOx6NoFkWBj7rNG9eWo0l'
 const base64Encoded = btoa(clientID + ':' + clientSecret) // Base64 encode our keys
-const plantBased = 'plant%20based%20' // Filter the term result to show only plant based queries
-const glutenFree = 'gluten%20free%20' // or gluten free queries. Assign to an option they can choose
 
 let tokenSettings = { // Our main api config
   "async": true,
@@ -75,7 +73,7 @@ submit.onclick = () => {
 
 }
 
-function setLocation(id, name) { // Here we are passing in the name and id of the store the user chooses
+setLocation = (id, name) => { // Here we are passing in the name and id of the store the user chooses
   sessionStorage.setItem('locationId', id) // We use sessionStorage to store the data and pass it into our products api
   sessionStorage.setItem('locationName', name)
   zipRow.style.display = 'none'
@@ -84,7 +82,7 @@ function setLocation(id, name) { // Here we are passing in the name and id of th
   locationResults.style.display = 'none'
 }
 
-function getLocations() { // oauth2 requires a token to access api data. Once a token is received, we pass it into our api auth header
+getLocations = () => { // oauth2 requires a token to access api data. Once a token is received, we pass it into our api auth header
 fetch('https://api.kroger.com/v1/connect/oauth2/token', tokenSettings)
 .then(res => res.json())
 .catch(err => console.log('Error', err))
@@ -108,9 +106,8 @@ fetch('https://api.kroger.com/v1/connect/oauth2/token', tokenSettings)
   }
 
   let locationData = data.data;
-  console.log(locationData)
   // We need to filter the results for locations based on whether the result has a deli department. This lets us know it's a food store, not a jewelry store. Or a gas station.
-  locationData.length >= 0 ? locationResults.style.display = 'block' : noResults.style.display = 'block' // If no results, display no results block
+  locationData.length > 0 ? locationResults.style.display = 'block' : noResults.style.display = 'block' // If no results, display no results block
 
   locationData.forEach(location => {
     noResults.style.display = 'none' // If no results block is active, disable it
@@ -147,7 +144,7 @@ fetch('https://api.kroger.com/v1/connect/oauth2/token', tokenSettings)
 .catch(err => console.log('Error', err))
 
 .then(data => { // Products api
-	return fetch(`https://api.kroger.com/v1/products?filter.term=gluten%20free%20${term}&filter.limit=25&filter.locationId=${sessionStorage.getItem('locationId')}`, {
+	return fetch(`https://api.kroger.com/v1/products?filter.term=${term}&filter.limit=25&filter.locationId=${sessionStorage.getItem('locationId')}`, {
 		"async": true,
     "crossDomain": true,
     "method": "GET",
@@ -171,7 +168,6 @@ fetch('https://api.kroger.com/v1/connect/oauth2/token', tokenSettings)
              imagesArr = image.url
            } 
          })
-         console.log(item.items)
          // Push all results into results container
         sectionResults.innerHTML += `
         <div class="container">
@@ -215,7 +211,6 @@ fetch('https://api.kroger.com/v1/connect/oauth2/token', tokenSettings)
         let modalPrice = document.getElementById("modal-price");
 
         modalOpen = (name, price) => {
-          console.log(name,price)
           modalPromo.style.display = "block";
           modalDesc.innerHTML = name;
           if (price > 0) {
