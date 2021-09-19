@@ -4,7 +4,7 @@
   "description": "An app for finding vegan and gluten free products",
   "main": "js/index.js",
   "scripts": {
-    "start": "index.html"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Christian B. Martinez",
   "license": "MIT",
