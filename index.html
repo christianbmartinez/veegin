@@ -1,103 +1,139 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">-->
-        <link rel="stylesheet" type="text/css" href="css/materialize.css">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-        <title>veegin- An app for finding vegan and gluten free foods fast.</title>
-    </head>
-<body>  
-
-<!-- NAV -->
-<section id="nav">
-    <nav>
+  <head>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+    <title>veegin- An app for finding vegan and gluten free foods fast.</title>
+  </head>
+  <body>
+    <!-- NAV -->
+    <section id="nav">
+      <nav>
         <div class="nav-wrapper purple darken-1">
-            <a class="brand-logo center logo-text">veegin</a>
-            <ul id="nav-mobile" class="left hide-on-med-and-down"></ul>
+          <a class="brand-logo center logo-text">veegin</a>
+          <ul id="nav-mobile" class="left hide-on-med-and-down"></ul>
         </div>
-    </nav>
-</section>
+      </nav>
+    </section>
 
-<!-- HERO -->
-<section id="hero">
-    <div class="container">
+    <!-- HERO -->
+    <section id="hero">
+      <div class="container">
         <div class="row">
-            <div class="col s12 center">
-                <img src="assets/hero.svg" class="hero-img" alt="veegin | An app for finding vegan food fast">
+          <div class="col s12 center">
+            <img
+              src="assets/hero.svg"
+              class="hero-img"
+              alt="veegin | An app for finding vegan food fast"
+            />
+          </div>
+          <div class="col s12 center">
+            <div class="heading-container">
+              <h1 class="title">Find foods fast.</h1>
+              <p class="subtitle">
+                Veegin makes searching plant based and gluten free products easy
+              </p>
             </div>
-            <div class="col s12 center">
-                <div class="heading-container">
-                    <h1 class="title">Find foods fast.</h1>
-                    <p class="subtitle">Veegin makes searching plant based and gluten free products easy</p> 
-                </div>
-            </div>
+          </div>
         </div>
-    </div>   
-</section>
+      </div>
+    </section>
 
-<!-- SEARCH / ZIP -->
-<section id="search">
-    <div class="container search-container">
+    <!-- SEARCH / ZIP -->
+    <section id="search">
+      <div class="container search-container">
         <div class="row" id="zip-row">
-            <div class="col s10">
-                <input type="text" placeholder="Zipcode" id="locale">       
-            </div>
-            <div class="col s2">
-                <button class="btn-floating waves-effect waves-light purple darken-1" id="submit-zip" type="submit"><i class="material-icons">search</i></button>
-            </div> 
+          <div class="col s10">
+            <input type="text" placeholder="Zipcode" id="locale" />
+          </div>
+          <div class="col s2">
+            <button
+              class="btn-floating waves-effect waves-light purple darken-1"
+              id="submit-zip"
+              type="submit"
+            >
+              <i class="material-icons">search</i>
+            </button>
+          </div>
         </div>
         <div class="row" id="search-row">
-            <div class="col s10">
-                <input type="text" id="query" placeholder="Search...">
-            </div>  
-            <div class="col s2">
-                <button class="btn-floating waves-effect waves-light purple darken-1" id="submit" type="submit"><i class="material-icons">search</i></button>
-            </div> 
-        </div>   
-          <div id="location-results">
-
+          <div class="col s10">
+            <input type="text" id="query" placeholder="Search..." />
           </div>
-          <div id="no-results">
-              <h5>No results to show.</h5>              
-              <button onclick="window.location.reload()" class="btn waves-effect waves-light purple darken-1" type="submit" name="action">New Search</button>
+          <div class="col s2">
+            <button
+              class="btn-floating waves-effect waves-light purple darken-1"
+              id="submit"
+              type="submit"
+            >
+              <i class="material-icons">search</i>
+            </button>
           </div>
-    </div>  
-</section>
+        </div>
+        <div id="location-results"></div>
+        <div id="no-results">
+          <h5>No results to show.</h5>
+          <button
+            onclick="window.location.reload()"
+            class="btn waves-effect waves-light purple darken-1"
+            type="submit"
+            name="action"
+          >
+            New Search
+          </button>
+        </div>
+      </div>
+    </section>
 
-<!-- RESULTS -->
-<section id="results">
+    <!-- RESULTS -->
+    <section id="results"></section>
 
-</section>
-
-<!-- FOOTER -->
-<footer class="page-footer black">
-    <div class="container">
+    <!-- FOOTER -->
+    <footer class="page-footer black">
+      <div class="container">
         <div class="row">
-            <div class="col l6 s12">
-                <a class="logo-text">veegin</a>
-                <p class="grey-text text-lighten-4">Find vegan and gluten free products easy<br> <i>Powered by Kroger Developers</i></p>
-            </div>
-            <div class="col l4 offset-l2 s12">
-                <h5 class="white-text">Tools</h5>
-                <ul>
-                <li><a class="grey-text text-lighten-3" href="#!">Store Finder</a></li>
-                <li><a class="grey-text text-lighten-3" href="#!">Product Lookup</a></li>
-                </ul>
-            </div>
+          <div class="col l6 s12">
+            <a class="logo-text">veegin</a>
+            <p class="grey-text text-lighten-4">
+              Find vegan and gluten free products easy<br />
+              <i>Powered by Kroger Developers</i>
+            </p>
+          </div>
+          <div class="col l4 offset-l2 s12">
+            <h5 class="white-text">Tools</h5>
+            <ul>
+              <li>
+                <a class="grey-text text-lighten-3" href="#!">Store Finder</a>
+              </li>
+              <li>
+                <a class="grey-text text-lighten-3" href="#!">Product Lookup</a>
+              </li>
+            </ul>
+          </div>
         </div>
-    </div>
-    <div class="footer-copyright">
+      </div>
+      <div class="footer-copyright">
         <div class="container">
-          <p class="grey-text text-lighten-1 center">© 2021 Veegin, All rights reserved</p>
+          <p class="grey-text text-lighten-1 center">
+            © 2021 Veegin, All rights reserved
+          </p>
         </div>
-    </div>
-</footer>
+      </div>
+    </footer>
 
-<!-- SCRIPTS -->
-<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>-->
-<script type="text/javascript" src="js/materialize.js"></script>
-<script src="js/index.js"></script>
-</body>
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>
